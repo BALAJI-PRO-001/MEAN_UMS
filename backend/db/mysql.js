@@ -9,7 +9,7 @@ const db = mysql.createConnection({
   port: process.env.MYSQL_DB_PORT,
   user: process.env.MYSQL_DB_USER, 
   // password: process.env.MYSQL_DB_PASSWORD,
-  database: "mern_ums"
+  database: "mean_ums"
 });
 
 db.connect((err) => {
