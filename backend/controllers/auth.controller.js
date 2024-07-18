@@ -1,4 +1,6 @@
 const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config();
 const User = require("../db/models/user.model");
 const errorHandler = require("../utils/errorHandler");
 
@@ -20,29 +22,39 @@ async function signUp(req, res, next) {
 async function signIn(req, res, next) {
   try {
     const { email, password } = req.body;
-    const user = await User.getUserByEmail(email);
-    
-    if (!user) {
-      return res.status(404).json({    
-        success: false,
-        message: "User not found"
-      });
-    }
+    const validUser = await User.getUserByEmail(email);
+    if (!validUser) next(errorHandler(404, "User not found"));
+    const isvalidPassword = bcryptjs.compareSync(password, validUser.password);
+    if (!isvalidPassword) next(errorHandler(401, "Unauthorized"));
 
-    if (bcryptjs.compareSync(password, user.password)) {
-      
-    } else {
-      res.status(401).json({
-        success: false,
-        message: "Unauthorized"
-      });
-    }
+    const accessToken = jwt.sign({id: validUser.id}, process.env.JWT_SECRET_KEY);
+    const { password: _, ...rest } = validUser;
+    res.status(200).cookie("access_token", accessToken, {httpOnly: true}).json({
+      success: true,
+      data: {
+        user: rest
+      }
+    });
   } catch(err) {
     next(err);
   }
 }
 
+
+async function signOut(req, res, next) {
+  try {
+    res.status(200).clearCookie("access_token").json({
+      success: true,
+      message: "User has been logged out"
+    });
+  } catch(err) {
+    next(err);
+  }
+}
+
+
 module.exports = {
   signUp,
-  signIn
+  signIn,
+  signOut
 };
