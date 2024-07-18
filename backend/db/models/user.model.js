@@ -21,9 +21,22 @@ async function getUserByEmail(email) {
   return user;
 }
 
+
+async function getUserById(id) {
+  const user = await new Promise((resolve, reject) => {
+    mysql.query(queries.SELECT_USER_BY_ID_SQL, id, (err, data) => {
+      if (err) reject(err);
+      else resolve(data[0]);
+    });
+  });
+  return user;
+}
+
+
 module.exports = {
   add,
-  getUserByEmail
+  getUserByEmail,
+  getUserById
 };
 
 
