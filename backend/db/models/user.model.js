@@ -33,10 +33,43 @@ async function getUserById(id) {
 }
 
 
+async function updateUser(id, values) {
+  await new Promise((resolve, reject) => {
+    const promises = [];
+    for (let [key, value] of Object.entries(values)) {
+      promises.push(new Promise((innerResolve, innerReject) => {
+        const sql = mysql.format(queries.UPDATE_USER_SQL, [key, value, id]);
+        mysql.query(sql, (err) => {
+          if (err) innerReject(err);
+          else innerResolve();
+        });
+      }));
+    }
+    Promise.all(promises)
+      .then(() => resolve())
+      .catch((err) => reject(err));
+  });
+  return await getUserById(id);
+}
+
+
+
+async function deleteUser(id) {
+  await new Promise((resolve, reject) => {
+    mysql.query(queries.DELETE_USER_SQL, id, (err) => {
+      if (err) reject(err);
+      else resolve();
+    });
+  });
+}
+
+
 module.exports = {
   add,
   getUserByEmail,
-  getUserById
+  getUserById,
+  updateUser,
+  deleteUser
 };
 
 
