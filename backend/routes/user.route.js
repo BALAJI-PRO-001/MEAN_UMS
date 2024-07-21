@@ -9,6 +9,6 @@ router.patch("/update/:id", verifyToken, updateUser)
 module.exports = router;
 
 /*
-  * http://localhost:3000/api/v1/user/update/1
-  * http://localhost:3000/api/v1/user/delete/1
+  * PATCH: http://localhost:3000/api/v1/user/update/1
+  * DELETE: http://localhost:3000/api/v1/user/delete/1
 */
