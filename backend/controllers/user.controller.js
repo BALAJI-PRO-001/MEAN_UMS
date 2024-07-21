@@ -1,5 +1,9 @@
 const bcryptjs = require("bcryptjs");
+const dotenv = require("dotenv").config();
+const path = require("path");
+const fs = require("fs");
 const User = require("../db/models/user.model");
+const upload = require("../utils/multer");
 const errorHandler = require("../utils/errorHandler");
 
 async function updateUser(req, res, next) {
@@ -43,7 +47,54 @@ async function deleteUser(req, res, next) {
 }
 
 
+async function uploadAvatar(req, res, next) {
+  upload(req, res, (err) => {
+    if (err) {
+      return next(errorHandler(500, err.message));
+    } else {
+      if (req.file == undefined) {
+        res.status(400).json({
+          success: false,
+          message: "No file selected"
+        });
+      } else {
+        const { originalname, filename} = req.file;
+        const downloadURL = `${req.protocol}://${req.hostname}:${process.env.PORT || 3000}/api/v1/user/download/avatar/${filename}`;
+        res.status(200).json({
+          success: true,
+          message: "File uploaded successfully",
+          file: {
+            originalname: originalname,
+            downloadURL: downloadURL
+          }
+        });
+      }
+    }
+  });
+}
+
+
+async function downloadAvatar(req, res, next) {
+  try {
+    const avatarFilePath = path.join(__dirname, "../uploads", req.params.fileName);
+    if (fs.existsSync(avatarFilePath)) {
+      res.status(200).sendFile(avatarFilePath);
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "File not found"
+      });
+    }
+  } catch(err) {
+    next(err);
+  }
+}
+
+
 module.exports = {
   updateUser,
-  deleteUser
+  deleteUser,
+  uploadAvatar,
+  downloadAvatar
 };
+
