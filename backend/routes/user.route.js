@@ -1,3 +1,5 @@
+const express = require("express");
+const { updateUser, deleteUser, uploadAvatar, downloadAvatar} = require("../controllers/user.controller");
 const verifyToken = require("../utils/verifyToken");
 const router = express.Router();
 
