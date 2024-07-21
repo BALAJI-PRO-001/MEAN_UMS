@@ -23,9 +23,9 @@ async function signIn(req, res, next) {
   try {
     const { email, password } = req.body;
     const validUser = await User.getUserByEmail(email);
-    if (!validUser) next(errorHandler(404, "User not found"));
+    if (!validUser) return next(errorHandler(404, "User not found"));
     const isvalidPassword = bcryptjs.compareSync(password, validUser.password);
-    if (!isvalidPassword) next(errorHandler(401, "Unauthorized"));
+    if (!isvalidPassword) return next(errorHandler(401, "Unauthorized"));
 
     const accessToken = jwt.sign({id: validUser.id}, process.env.JWT_SECRET_KEY);
     const { password: _, ...rest } = validUser;
