@@ -33,22 +33,19 @@ async function getUserById(id) {
 }
 
 
-async function updateUser(id, values) {
-  await new Promise((resolve, reject) => {
-    const promises = [];
-    for (let [key, value] of Object.entries(values)) {
-      promises.push(new Promise((innerResolve, innerReject) => {
-        const sql = mysql.format(queries.UPDATE_USER_SQL, [key, value, id]);
-        mysql.query(sql, (err) => {
-          if (err) innerReject(err);
-          else innerResolve();
-        });
-      }));
-    }
-    Promise.all(promises)
-      .then(() => resolve())
-      .catch((err) => reject(err));
+
+/* Another approach to update user records asynchronously */
+async function updateUser(id, data) {
+  const promises = Object.entries(data).map(([key, value]) => {
+    return new Promise((resolve, reject) => {
+      const sql = mysql.format(queries.UPDATE_USER_SQL, [key, value, id]);
+      mysql.query(sql, (err) => {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
   });
+  await Promise.all(promises);
   return await getUserById(id);
 }
 
