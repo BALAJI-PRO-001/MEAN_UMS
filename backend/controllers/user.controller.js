@@ -49,27 +49,19 @@ async function deleteUser(req, res, next) {
 
 async function uploadAvatar(req, res, next) {
   upload(req, res, (err) => {
-    if (err) {
-      return next(errorHandler(500, err.message));
-    } else {
-      if (req.file == undefined) {
-        res.status(400).json({
-          success: false,
-          message: "No file selected"
-        });
-      } else {
-        const { originalname, filename} = req.file;
-        const downloadURL = `${req.protocol}://${req.hostname}:${process.env.PORT || 3000}/api/v1/user/download/avatar/${filename}`;
-        res.status(200).json({
-          success: true,
-          message: "File uploaded successfully",
-          file: {
-            originalname: originalname,
-            downloadURL: downloadURL
-          }
-        });
+    if (err) return next(errorHandler(500, err.message));
+    if (req.file == undefined) next(errorHandler(400, "No File Selected"));
+
+    const { originalname, filename} = req.file;
+    const downloadURL = `${req.protocol}://${req.hostname}:${process.env.PORT || 3000}/api/v1/user/download/avatar/${filename}`;
+    res.status(200).json({
+      success: true,
+      message: "File uploaded successfully",
+      file: {
+        originalname: originalname,
+        downloadURL: downloadURL
       }
-    }
+    });
   });
 }
 
@@ -77,14 +69,8 @@ async function uploadAvatar(req, res, next) {
 async function downloadAvatar(req, res, next) {
   try {
     const avatarFilePath = path.join(__dirname, "../uploads", req.params.fileName);
-    if (fs.existsSync(avatarFilePath)) {
-      res.status(200).sendFile(avatarFilePath);
-    } else {
-      res.status(404).json({
-        success: false,
-        message: "File not found"
-      });
-    }
+    if (!fs.existsSync(avatarFilePath)) next(errorHandler(404, "File not found"));
+    res.status(200).sendFile(avatarFilePath);
   } catch(err) {
     next(err);
   }
