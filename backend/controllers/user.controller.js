@@ -50,7 +50,7 @@ async function deleteUser(req, res, next) {
 async function uploadAvatar(req, res, next) {
   upload(req, res, (err) => {
     if (err) return next(errorHandler(500, err.message));
-    if (req.file == undefined) next(errorHandler(400, "No File Selected"));
+    if (req.file == undefined) return next(errorHandler(400, "No File Selected"));
 
     const { originalname, filename} = req.file;
     const downloadURL = `${req.protocol}://${req.hostname}:${process.env.PORT || 3000}/api/v1/user/download/avatar/${filename}`;
@@ -69,7 +69,7 @@ async function uploadAvatar(req, res, next) {
 async function downloadAvatar(req, res, next) {
   try {
     const avatarFilePath = path.join(__dirname, "../uploads", req.params.fileName);
-    if (!fs.existsSync(avatarFilePath)) next(errorHandler(404, "File not found"));
+    if (!fs.existsSync(avatarFilePath)) return next(errorHandler(404, "File not found"));
     res.status(200).sendFile(avatarFilePath);
   } catch(err) {
     next(err);
