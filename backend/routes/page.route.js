@@ -1,11 +1,15 @@
 const express = require("express");
-const { indexPage } = require("../controllers/page.controller");
+const { indexPage, signUpPage, signInPage } = require("../controllers/page.controller");
 const router = express.Router();
 
-router.get("/", indexPage);
+router.get("/", indexPage)
+      .get("/sign-up", signUpPage)
+      .get("/sign-in", signInPage);
 
 module.exports = router;
 
 /* 
-  GET: /
+  * GET: /
+  * GET: /sign-up
+  * GET: /sign-in
 */
