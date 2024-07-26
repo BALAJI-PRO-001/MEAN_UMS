@@ -5,7 +5,7 @@
 header {
   height: 70px;
   width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.897);
   display: flex;
   align-items: center;
 }
@@ -45,18 +45,19 @@ header > .logo-container > a {
 
 #navbar > a {
   font-family: var(--font-family);
+  font-size: 18px;
   color: white;
   text-decoration: none;
   font-weight: bold;
-  margin-left: 10px;
-  padding: 4px 8px;
+  margin-left: 5px;
+  padding: 5px 6px;
   border-radius: 5px;
   transition: 300ms;
 }
 
 #navbar > a:hover {
-  background-color: white;
-  color: black;
+  background-color: rgba(128, 128, 128, 0.24);
+  color: white;
 }
 
 @media (max-width: 800px) {
