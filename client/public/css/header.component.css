@@ -3,9 +3,9 @@
 }
 
 header {
-  height: 70px;
+  height: 60px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.897);
+  background-color: rgba(0, 0, 0, 0.84);
   display: flex;
   align-items: center;
 }
@@ -21,7 +21,7 @@ header > .logo-container > a {
   font-family: var(--font-family);
   text-decoration: none;
   color: white;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   margin-left: 30px;
 }
@@ -33,9 +33,9 @@ header > .logo-container > a {
 
 #menu > .menu-bar {
   background-color: white;
-  height: 5px;
-  width: 35px;
-  margin-bottom: 3px;
+  height: 4px;
+  width: 30px;
+  margin-bottom: 5px;
   border-radius: 2px;
 }
 
@@ -45,7 +45,7 @@ header > .logo-container > a {
 
 #navbar > a {
   font-family: var(--font-family);
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   text-decoration: none;
   font-weight: bold;
