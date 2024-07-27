@@ -1,0 +1,63 @@
+:root {
+  --font-family: "Roboto";
+}
+
+#container {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+#container > form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#container > form > h2 {
+  font-family: var(--font-family);
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#container > form > .input-group {
+  margin-top: 5px;
+  height: 65px;
+  width: 100%;
+  position: relative;
+}
+
+#container > form > .input-group > input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.387);
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight: bold;
+  text-indent: 35px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#container > form > .input-group > img {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translate(-50%, -50%);
+}
+
+#container > form > .input-group > p {
+  color: red;
+  font-family: var(--font-family);
+  font-weight: bold;
+  position: absolute;
+  font-size: 15px;
+  bottom: -8px;
+}
