@@ -36,8 +36,8 @@ async function deleteUser(req, res, next) {
     const { email, password } = req.body;
     const userToDelete = await User.getUserByEmail(email);
     if (!userToDelete) return next(errorHandler(404, "User not found"));
-    const isvalidPassword = bcryptjs.compareSync(password, userToDelete.password);
-    if (!isvalidPassword) return next(errorHandler(401, "Unauthorized"));
+    const isValidPassword = bcryptjs.compareSync(password, userToDelete.password);
+    if (!isValidPassword) return next(errorHandler(401, "Unauthorized"));
 
     await User.deleteUser(req.params.id);
     res.status(204).json({});
