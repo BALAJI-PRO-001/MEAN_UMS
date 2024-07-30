@@ -6,9 +6,49 @@
   <title>Sign Up</title>
   <link rel="stylesheet" href="/css/global.css">
   <link rel="stylesheet" href="/css/header.component.css">
+  <link rel="stylesheet" href="/css/signup.css">
 </head>
 <body>
   {{HEADER}}
-  <p>Sign up page</p>
+  <div id="container">
+    <form>
+      <h2>Sign Up</h2>
+
+      <div id="avatar-container"></div>
+      <p id="avatar-message-element"></p>
+
+      <div class="input-group">
+        <input type="text" placeholder="Username . . . .">
+        <img src="/images/icons/user-icon.png" alt="icon">
+        <p></p>
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Email . . . .">
+        <img src="/images/icons/email-icon.png" alt="icon">
+        <p></p>
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Password . . . .">
+        <img src="/images/icons/lock-icon.png" alt="icon">
+        <img src="/images/icons/eye-close-icon.png" alt="icon" id="eye-icon">
+        <p></p>
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Confirm password . . . .">
+        <img src="/images/icons/lock-icon.png" alt="icon">
+        <img src="/images/icons/eye-close-icon.png" alt="icon" id="eye-icon">
+        <p></p>
+      </div>
+
+      <button type="button">Sign In</button>
+      <p>
+        Have an account?
+        <a href="/sign-in">Sign in</a>
+      </p>
+    </form>
+  </div>
 </body>
 </html>
