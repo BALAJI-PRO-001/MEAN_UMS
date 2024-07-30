@@ -22,6 +22,23 @@
   margin-bottom: 15px;
 }
 
+
+#avatar-container {
+  border: 1px solid  rgba(0, 0, 0, 0.387);
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  background-image: url("/images/default-profile-img.png");
+  background-size: cover;
+  background-position: center;
+}
+
+#avatar-message-element {
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: green;
+}
+
 #container > form > .input-group {
   margin-top: 5px;
   height: 65px;
