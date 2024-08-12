@@ -1,0 +1,21 @@
+Name
+=====
+Name cannot be empty
+Name cannot contain numeric characters
+Name cannot contain special characters
+
+Email
+=====
+Email cannot be empty
+Invalid email address. Please enter a valid email
+
+Password
+========
+Password cannot be empty
+Password must contain at least one uppercase letter
+Password must contain at least one numeric character
+Password must contain at least one special character
+Password must be 8 characters or longer
+
+Confirm Password cannot be empty
+Password and Confirm Password do not match

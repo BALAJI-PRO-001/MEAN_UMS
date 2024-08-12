@@ -11,36 +11,36 @@
 <body>
   {{HEADER}}
   <div id="container">
-    <form>
+    <form id="sign-up-form">
       <h2>Sign Up</h2>
 
       <div id="avatar-container"></div>
       <p id="avatar-message-element"></p>
 
       <div class="input-group">
-        <input type="text" placeholder="Username . . . .">
+        <input type="text" placeholder="Username . . . ." id="name">
         <img src="/images/icons/user-icon.png" alt="icon">
-        <p></p>
+        <p id="error-element"></p>
       </div>
 
       <div class="input-group">
-        <input type="text" placeholder="Email . . . .">
+        <input type="text" placeholder="Email . . . ." id="email">
         <img src="/images/icons/email-icon.png" alt="icon">
-        <p></p>
+        <p id="error-element"></p>
       </div>
 
       <div class="input-group">
-        <input type="text" placeholder="Password . . . .">
+        <input type="password" placeholder="Password . . . ." id="password">
         <img src="/images/icons/lock-icon.png" alt="icon">
         <img src="/images/icons/eye-close-icon.png" alt="icon" id="eye-icon">
-        <p></p>
+        <p id="error-element"></p>
       </div>
 
       <div class="input-group">
-        <input type="text" placeholder="Confirm password . . . .">
+        <input type="password" placeholder="Confirm password . . . ." id="confirm-password">
         <img src="/images/icons/lock-icon.png" alt="icon">
         <img src="/images/icons/eye-close-icon.png" alt="icon" id="eye-icon">
-        <p></p>
+        <p id="error-element"></p>
       </div>
 
       <button type="button">Sign In</button>
@@ -50,5 +50,6 @@
       </p>
     </form>
   </div>
+  <script src="/js/signup.js" type="module"></script>
 </body>
 </html>
