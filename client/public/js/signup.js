@@ -1,5 +1,10 @@
-import { toggleIcon, toggleType } from "./utils/userInteraction.js";
 import validator from "./utils/Validator.js";
+import { addValidationListeners } from "./utils/common.js";
+import { 
+  toggleIcon, 
+  toggleType,
+  validateNameAndUpdateUI
+} from "./utils/userInteraction.js";
 
 const signUpForm = document.getElementById("sign-up-form");
 const nameInput = signUpForm.querySelector("#name");
@@ -29,10 +34,4 @@ imgElements[1].addEventListener("click", () => {
 });
 
 
-nameInput.addEventListener("keyup", () => {
-  const { isValid, message } = validator.isValidName(nameInput.value);
-  if (!isValid) {
-    const errorElement = nameInput.parentElement.querySelector("#error-element");
-    errorElement.innerText = message;
-  }
-});
+addValidationListeners(nameInput, validateNameAndUpdateUI);
