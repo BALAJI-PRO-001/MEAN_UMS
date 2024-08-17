@@ -53,3 +53,54 @@ export function validateNameAndUpdateUI(e) {
   setMessage(errorElement, "");
   return true;
 }
+
+
+export function validateEmailAndUpdateUI(e) {
+  const email = e.target.value;
+  const { isValid, message } = validator.isValidEmail(email);
+  const errorElement = e.target.parentElement.querySelector("#error-element");
+
+  if (!isValid) {
+    setBorder(e.target, "2px solid red");
+    setMessage(errorElement, `${message} . . . .`)
+    return false;
+  }
+
+  setBorder(e.target, "2px solid grey");
+  setMessage(errorElement, "");
+  return true;
+}
+
+
+export function validatePasswordAndUpdateUI(e) {
+  const password = e.target.value;
+  const { isValid, message } = validator.isValidPassword(password);
+  const errorElement = e.target.parentElement.querySelector("#error-element");
+
+  if (!isValid) {
+    setBorder(e.target, "2px solid red");
+    setMessage(errorElement, `${message} ....`);
+    return false;
+  }
+
+  setBorder(e.target, "2px solid grey");
+  setMessage(errorElement, "");
+  return true;
+}
+
+
+export function validateConfirmPasswordAndUpdateUI(e, password) {
+  const confirmPassword = e.target.value;
+  const { isValid, message } = validator.isValidConfirmPassword(password, confirmPassword);
+  const errorElement = e.target.parentElement.querySelector("#error-element");
+
+  if (!isValid) {
+    setBorder(e.target, "2px solid red");
+    setMessage(errorElement, `${message} ....`);
+    return false;
+  }
+
+  setBorder(e.target, "2px solid grey");
+  setMessage(errorElement, "");
+  return true;
+}
