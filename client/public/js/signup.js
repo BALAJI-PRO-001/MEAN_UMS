@@ -3,7 +3,10 @@ import { addValidationListeners } from "./utils/common.js";
 import { 
   toggleIcon, 
   toggleType,
-  validateNameAndUpdateUI
+  validateConfirmPasswordAndUpdateUI,
+  validateEmailAndUpdateUI,
+  validateNameAndUpdateUI,
+  validatePasswordAndUpdateUI
 } from "./utils/userInteraction.js";
 
 const signUpForm = document.getElementById("sign-up-form");
@@ -35,3 +38,8 @@ imgElements[1].addEventListener("click", () => {
 
 
 addValidationListeners(nameInput, validateNameAndUpdateUI);
+addValidationListeners(emailInput, validateEmailAndUpdateUI);
+addValidationListeners(passwordInput, validatePasswordAndUpdateUI);
+addValidationListeners(confirmPasswordInput, (e) => {
+  validateConfirmPasswordAndUpdateUI(e, passwordInput.value)
+});
